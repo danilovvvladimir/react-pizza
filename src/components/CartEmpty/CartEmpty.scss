@@ -1,0 +1,33 @@
+.cart-empty {
+  margin: 20px auto;
+  text-align: center;
+  &__title {
+    font-size: 36px;
+    line-height: 40px;
+    margin-bottom: 15px;
+  }
+  &__subtitle {
+    font-size: 18px;
+    line-height: 26px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  &__image {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+  &__btn-back {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 24px;
+    padding: 15px 40px;
+    background-color: #232323;
+    color: #fff;
+    border-radius: 20px;
+    &:hover {
+      background-color: #3d3d3d;
+    }
+  }
+}

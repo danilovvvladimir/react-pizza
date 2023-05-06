@@ -2,15 +2,21 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Menu from "../Menu/Menu";
 
+import "./Layout.scss";
+
 const Layout = () => {
   return (
     <>
-      <header>
-        <div className="container--big">
+      <header className="header">
+        <div className="container">
           <Menu />
         </div>
       </header>
-      <Outlet />
+      <div className="content">
+        <div className="container">
+          <Outlet />
+        </div>
+      </div>
     </>
   );
 };
