@@ -1,0 +1,88 @@
+@import "../../assets/styles/variables.scss";
+
+.cart {
+  width: 70%;
+  margin: 0 auto;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 30px;
+    line-height: 34px;
+    color: #232323;
+    font-weight: 700;
+  }
+  &__btn-clear {
+    border: none;
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    cursor: pointer;
+    background-color: transparent;
+    color: #b4b4b4;
+    font-size: 16px;
+    line-height: 18px;
+    transition: all 0.15s ease;
+    &:hover {
+      color: #999999;
+    }
+  }
+  &__content {
+    padding: 40px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  &__bottom {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  &__info {
+    font-size: 20px;
+    line-height: 22px;
+    color: #232323;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  &__info-amount {
+    &-span {
+      font-weight: 700;
+    }
+  }
+  &__info-price {
+    &-span {
+      font-weight: 700;
+      color: $accent-color;
+    }
+  }
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__btn-back {
+    display: flex;
+    gap: 10px;
+    padding: 12px 20px;
+  }
+  &__btn-back-icon {
+    font-size: 22px;
+  }
+  &__btn-pay {
+    padding: 12px 40px;
+  }
+}

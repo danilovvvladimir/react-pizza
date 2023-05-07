@@ -1,0 +1,59 @@
+@import "../../assets/styles/variables.scss";
+.pizzas-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 30px;
+  }
+  &__category-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  &__category-item {
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #ececec;
+    color: #232323;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: all 0.5s ease;
+    &--active {
+      color: #fff;
+      background-color: #232323;
+    }
+  }
+  &__sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__sort-type {
+    cursor: pointer;
+    color: $accent-color;
+    border-bottom: 1px dotted $accent-color;
+  }
+  &__search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  &__search-icon {
+    color: #232323;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+  }
+  &__search-input {
+    padding: 10px 20px 10px 40px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }
+}

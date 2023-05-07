@@ -1,0 +1,68 @@
+@import "../../assets/styles/variables.scss";
+.single-pizza {
+  margin: 0 auto;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  &__image {
+    width: 260px;
+    margin-bottom: 10px;
+  }
+  &__name {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  &__info {
+    padding: 5px;
+    background-color: #eee;
+    border-radius: 12px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+  }
+  &__types-list {
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: space-between;
+  }
+  &__types-list-item {
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    padding: 5px 10px;
+    &--active {
+      background-color: #fff;
+      border-radius: 6px;
+    }
+  }
+  &__sizes-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__sizes-list-item {
+    font-weight: 500;
+    cursor: pointer;
+    padding: 5px 10px;
+    width: 100%;
+    text-align: center;
+    &--active {
+      background-color: #fff;
+      border-radius: 6px;
+    }
+  }
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__pricebox {
+    color: #232323;
+    font-weight: 700;
+    font-size: 24px;
+  }
+  &__btn {
+    border-radius: 10px;
+    padding: 5px 20px;
+  }
+}

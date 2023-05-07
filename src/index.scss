@@ -18,8 +18,8 @@ html {
   box-sizing: inherit;
 }
 
-ul[class],
-ol[class] {
+ul,
+ol {
   padding: 0;
 }
 
@@ -31,8 +31,8 @@ h4,
 h5,
 h6,
 p,
-ul[class],
-ol[class],
+ul,
+ol,
 li,
 figure,
 figcaption,
@@ -66,4 +66,50 @@ a {
   margin: 0 auto;
   padding: 0 15px;
   max-width: 1110px;
+}
+
+.btn {
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  color: #fff;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  &:hover {
+    background-color: $accent-color;
+  }
+
+  &--filled {
+    background-color: $accent-color;
+    &:hover {
+      background-color: $accent-hover-color;
+    }
+  }
+
+  &--outlined {
+    border: 1px solid $accent-color;
+    background-color: #fff;
+    color: $accent-color;
+    transition: all 0.3s ease;
+    &:hover {
+      color: #fff;
+      background-color: $accent-color;
+    }
+  }
+
+  &--gray {
+    border: 1px solid #ccc;
+    background-color: transparent;
+    color: #ccc;
+    transition: all 0.3s ease;
+    &:hover {
+      color: #2c2c2c;
+      background-color: #ccc;
+    }
+  }
 }

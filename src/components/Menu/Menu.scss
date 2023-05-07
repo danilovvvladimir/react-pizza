@@ -4,6 +4,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  &__cart-link {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    background-color: $accent-color;
+    border-radius: 12px;
+    transition: all 0.15s ease;
+    &:hover {
+      background-color: $accent-hover-color;
+    }
+  }
+  &__cart-price {
+    padding-right: 15px;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  &__cart-image {
+    margin-right: 5px;
+  }
+  &__cart-amount {
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .logo {
@@ -27,33 +52,5 @@
   }
   &__subtitle {
     color: #666;
-  }
-}
-
-.cart {
-  &__link {
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #fff;
-    background-color: $accent-color;
-    border-radius: 12px;
-    transition: all 0.15s ease;
-    &:hover {
-      background-color: $accent-hover-color;
-    }
-  }
-  &__price {
-    padding-right: 15px;
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
-  }
-  &__image {
-    margin-right: 5px;
-  }
-  &__amount {
-    padding-left: 15px;
-    display: flex;
-    align-items: center;
   }
 }

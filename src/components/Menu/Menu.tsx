@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import pizzaLogo from "../../assets/images/logo128.png";
-import cartIcon from "../../assets/images/icons/cart.svg";
+
+import { IoCartOutline } from "react-icons/io5";
 
 import "./Menu.scss";
 
@@ -19,11 +20,12 @@ const Menu = () => {
           </div>
         </Link>
       </div>
-      <div className="cart">
-        <Link to="/cart" className="cart__link">
-          <div className="cart__price">1290 ₽</div>
-          <div className="cart__amount">
-            <img src={cartIcon} alt="cart" className="cart__image" />3
+      <div className="menu__cart">
+        <Link to="/cart" className="menu__cart-link">
+          <div className="menu__cart-price">1290 ₽</div>
+          <div className="menu__cart-amount">
+            <IoCartOutline className="menu__cart-image" />3
+            {/* <img src={cartIcon} alt="cart" className="cart__image" />3 */}
           </div>
         </Link>
       </div>
