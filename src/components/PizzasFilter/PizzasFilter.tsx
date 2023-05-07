@@ -1,22 +1,80 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { Sort, SortProperty } from "../../models/filterTypes";
+import { RootState } from "../../redux/store";
+import { setSort, setCategoryId } from "../../redux/slices/filterSlice";
 import "./PizzasFilter.scss";
 
+const SORT_LIST: Sort[] = [
+  { name: "популярности (DESC)", sortProperty: SortProperty.RATING_DESC },
+  { name: "популярности (ASC)", sortProperty: SortProperty.RATING_ASC },
+  { name: "цене (DESC)", sortProperty: SortProperty.PRICE_DESC },
+  { name: "цене (ASC)", sortProperty: SortProperty.PRICE_ASC },
+  { name: "алфавиту (DESC)", sortProperty: SortProperty.TITLE_DESC },
+  { name: "алфавиту (ASC)", sortProperty: SortProperty.TITLE_ASC },
+];
+
+const CATEGORY_LIST: string[] = [
+  "Все",
+  "Мясные",
+  "Вегетарианская",
+  "Гриль",
+  "Острые",
+  "Закрытые",
+];
+
+const LI_SORT_CLASSNAME = "pizzas-filter__sort-list-item";
+const LI_SORT_ACTIVE_CLASSNAME = "pizzas-filter__sort-list-item--active";
+const LI_CATEGORY_CLASSNAME = "pizzas-filter__category-item";
+const LI_CATEGORY_ACTIVE_CLASSNAME = "pizzas-filter__category-item--active";
+
 const PizzasFilter = () => {
+  const { categoryId, sort: sortState } = useSelector(
+    (state: RootState) => state.filterReducer
+  );
+  const [isPopupOpened, setIsPopupOpened] = React.useState(false);
+  const sortRef = React.useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
+
+  const onTriggerPopup = (sort: Sort) => {
+    dispatch(setSort(sort));
+    setIsPopupOpened(false);
+  };
+  const onTriggerCategory = (newCategoryId: number) => {
+    dispatch(setCategoryId(newCategoryId));
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
+        setIsPopupOpened(false);
+      }
+    };
+
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => document.body.removeEventListener("click", handleClickOutside);
+  }, []);
+
   return (
     <div className="pizzas-filter">
       <div className="pizzas-filter__nav">
         <ul className="pizzas-filter__category-list">
-          <li className="pizzas-filter__category-item pizzas-filter__category-item--active">
-            Все
-          </li>
-          <li className="pizzas-filter__category-item">Мясные</li>
-          <li className="pizzas-filter__category-item">Вегетарианская</li>
-          <li className="pizzas-filter__category-item">Гриль</li>
-          <li className="pizzas-filter__category-item">Острые</li>
-          <li className="pizzas-filter__category-item">Закрытые</li>
+          {CATEGORY_LIST.map((categoryName, index) => (
+            <li
+              key={index}
+              onClick={() => onTriggerCategory(index)}
+              className={
+                CATEGORY_LIST[categoryId] === categoryName
+                  ? `${LI_CATEGORY_CLASSNAME} ${LI_CATEGORY_ACTIVE_CLASSNAME}`
+                  : `${LI_CATEGORY_CLASSNAME}`
+              }>
+              {categoryName}
+            </li>
+          ))}
         </ul>
-        <div className="pizzas-filter__sort">
+        <div className="pizzas-filter__sort" ref={sortRef}>
           <svg
             width="10"
             height="6"
@@ -28,7 +86,28 @@ const PizzasFilter = () => {
               fill="#2C2C2C"></path>
           </svg>
           Сортировать по:{" "}
-          <span className="pizzas-filter__sort-type">популярности</span>
+          <span
+            className="pizzas-filter__sort-type"
+            onClick={() => setIsPopupOpened((isPopupOpened) => !isPopupOpened)}>
+            {sortState.name}
+          </span>
+          <div className="pizzas-filter__sort-popup">
+            <ul className="pizzas-filter__sort-list">
+              {isPopupOpened &&
+                SORT_LIST.map((sort) => (
+                  <li
+                    key={sort.sortProperty}
+                    onClick={() => onTriggerPopup(sort)}
+                    className={
+                      sortState.sortProperty === sort.sortProperty
+                        ? `${LI_SORT_CLASSNAME} ${LI_SORT_ACTIVE_CLASSNAME}`
+                        : `${LI_SORT_CLASSNAME}`
+                    }>
+                    {sort.name}
+                  </li>
+                ))}
+            </ul>
+          </div>
         </div>
       </div>
 

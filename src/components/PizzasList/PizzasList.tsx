@@ -8,6 +8,10 @@ import { SinglePizzaSkeleton } from "../SinglePizza/SinglePizzaSkeleton";
 
 import "./PizzasList.scss";
 
+const skeletons = [...new Array(6)].map((_, index) => (
+  <SinglePizzaSkeleton key={index} />
+));
+
 const PizzasList: FC = () => {
   const { items, status } = useSelector(
     (state: RootState) => state.pizzaReducer
@@ -17,10 +21,6 @@ const PizzasList: FC = () => {
   useEffect(() => {
     dispatch(fetchPizzas());
   }, []);
-
-  const skeletons = [...new Array(6)].map((_, index) => (
-    <SinglePizzaSkeleton key={index} />
-  ));
 
   const pizzas = items.map((item) => <SinglePizza key={item.id} {...item} />);
 
