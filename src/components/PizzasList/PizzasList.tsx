@@ -13,10 +13,13 @@ const skeletons = [...new Array(6)].map((_, index) => (
 ));
 
 const PizzasList: FC = () => {
+  console.log("List Rerendered");
+
   const {
     categoryId,
     sort: sortState,
     currentPage,
+    searchValue,
   } = useSelector((state: RootState) => state.filterReducer);
   const { items, status } = useSelector(
     (state: RootState) => state.pizzaReducer
@@ -35,9 +38,10 @@ const PizzasList: FC = () => {
         order,
         category,
         currentPage,
+        searchValue,
       })
     );
-  }, [sortState.sortProperty, categoryId, currentPage]);
+  }, [sortState.sortProperty, categoryId, currentPage, searchValue]);
 
   const pizzas = items.map((item) => <SinglePizza key={item.id} {...item} />);
 

@@ -40,6 +40,7 @@ const Pagination: FC = () => {
       <ul className="pagination__list">
         {PAGINATION_BTN_ARRAY.map((_, index) => (
           <li
+            key={index}
             className={`pagination__list-item ${
               currentPage === index && `pagination__list-item--active`
             }`}

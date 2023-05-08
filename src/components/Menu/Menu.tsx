@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import pizzaLogo from "../../assets/images/logo128.png";
 
@@ -9,9 +9,20 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
 const Menu = () => {
-  const { totalPrice, allItems } = useSelector(
+  const { totalPrice, allItems, cartItems } = useSelector(
     (state: RootState) => state.cartReducer
   );
+
+  const isMounted = React.useRef(false);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(cartItems);
+      localStorage.setItem("cart", json);
+    }
+    isMounted.current = true;
+  }, [cartItems]);
+
   return (
     <nav className="menu">
       <div className="logo">

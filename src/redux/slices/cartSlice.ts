@@ -6,12 +6,15 @@ import {
 } from "../../models/cartTypes";
 import { calcAllItems } from "../../utils/calcAllItems";
 import { calcTotalPrice } from "../../utils/calcTotalPrice";
+import { getCartFromLS } from "../../utils/getCartFromLS";
 
-const initialState: CartSliceState = {
-  totalPrice: 0,
-  allItems: 0,
-  cartItems: [],
-};
+// const initialState: CartSliceState = {
+//   totalPrice: 0,
+//   allItems: 0,
+//   cartItems: [],
+// };
+
+const initialState: CartSliceState = getCartFromLS();
 
 const cartSlice = createSlice({
   name: "filter",

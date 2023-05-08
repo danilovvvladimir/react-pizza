@@ -15,14 +15,12 @@ const initialState: PizzaSliceState = {
 export const fetchPizzas = createAsyncThunk<Pizza[], SearchPizzaParams>(
   "pizza/fetchPizzasStatus",
   async (params) => {
-    const { category, order, sortBy, currentPage } = params;
+    const { category, order, sortBy, currentPage, searchValue } = params;
     const url = `https://6454d7aca74f994b334a7b76.mockapi.io/items?page=${
       currentPage + 1
-    }&limit=6&${category}&sortBy=${sortBy}&order=${order}`;
+    }&limit=6&${category}&sortBy=${sortBy}&order=${order}&search=${searchValue}`;
 
     const { data } = await axios.get(url);
-
-    // console.log("Запрос на url:", url, "Пришедшие данные:", data);
 
     return data;
   }

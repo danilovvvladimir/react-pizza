@@ -24,5 +24,5 @@ export type SearchPizzaParams = {
   order: string;
   category: string;
   currentPage: number;
-  // search: string;
+  searchValue: string;
 };

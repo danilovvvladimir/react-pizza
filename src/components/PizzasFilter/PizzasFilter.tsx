@@ -1,18 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Sort, SortProperty } from "../../models/filterTypes";
 import { RootState } from "../../redux/store";
-import { setSort, setCategoryId } from "../../redux/slices/filterSlice";
+import {
+  setSort,
+  setCategoryId,
+  setSearchValue,
+} from "../../redux/slices/filterSlice";
+import debounce from "lodash.debounce";
 import "./PizzasFilter.scss";
 
 const SORT_LIST: Sort[] = [
-  { name: "популярности (DESC)", sortProperty: SortProperty.RATING_DESC },
-  { name: "популярности (ASC)", sortProperty: SortProperty.RATING_ASC },
-  { name: "цене (DESC)", sortProperty: SortProperty.PRICE_DESC },
-  { name: "цене (ASC)", sortProperty: SortProperty.PRICE_ASC },
-  { name: "алфавиту (DESC)", sortProperty: SortProperty.TITLE_DESC },
-  { name: "алфавиту (ASC)", sortProperty: SortProperty.TITLE_ASC },
+  { name: "популярности ↓", sortProperty: SortProperty.RATING_DESC },
+  { name: "популярности ↑", sortProperty: SortProperty.RATING_ASC },
+  { name: "цене ↓", sortProperty: SortProperty.PRICE_DESC },
+  { name: "цене ↑", sortProperty: SortProperty.PRICE_ASC },
+  { name: "алфавиту ↓", sortProperty: SortProperty.TITLE_DESC },
+  { name: "алфавиту ↑", sortProperty: SortProperty.TITLE_ASC },
 ];
 
 const CATEGORY_LIST: string[] = [
@@ -30,9 +35,13 @@ const LI_CATEGORY_CLASSNAME = "pizzas-filter__category-item";
 const LI_CATEGORY_ACTIVE_CLASSNAME = "pizzas-filter__category-item--active";
 
 const PizzasFilter = () => {
-  const { categoryId, sort: sortState } = useSelector(
-    (state: RootState) => state.filterReducer
-  );
+  const {
+    categoryId,
+    sort: sortState,
+    searchValue,
+  } = useSelector((state: RootState) => state.filterReducer);
+
+  const [localValue, setLocalValue] = useState("");
   const [isPopupOpened, setIsPopupOpened] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
@@ -43,6 +52,18 @@ const PizzasFilter = () => {
   };
   const onTriggerCategory = (newCategoryId: number) => {
     dispatch(setCategoryId(newCategoryId));
+  };
+
+  const updateSearchValue = useCallback(
+    debounce((str: string) => {
+      dispatch(setSearchValue(str));
+    }, 250),
+    [dispatch]
+  );
+
+  const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalValue(event.target.value);
+    updateSearchValue(event.target.value);
   };
 
   useEffect(() => {
@@ -115,6 +136,8 @@ const PizzasFilter = () => {
         <AiOutlineSearch className="pizzas-filter__search-icon" />
 
         <input
+          value={localValue}
+          onChange={(event) => handleChangeValue(event)}
           className="pizzas-filter__search-input"
           placeholder="Введите название пиццы..."
         />
