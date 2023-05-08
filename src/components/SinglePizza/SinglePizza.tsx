@@ -1,4 +1,6 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
+import { addCartItem } from "../../redux/slices/cartSlice";
 import "./SinglePizza.scss";
 
 interface SinglePizzaProps {
@@ -22,12 +24,25 @@ const SinglePizza: FC<SinglePizzaProps> = ({
   name,
   price,
   imageUrl,
-  rating,
   sizes,
   types,
 }) => {
   const [activeType, setActiveType] = React.useState<number>(types[0]);
   const [activeSize, setActiveSize] = React.useState<number>(0);
+  const dispatch = useDispatch();
+
+  const addPizza = () => {
+    dispatch(
+      addCartItem({
+        id,
+        name,
+        price,
+        imageUrl,
+        size: sizes[activeSize],
+        type: TYPE_NAMES[activeType],
+      })
+    );
+  };
 
   return (
     <div className="single-pizza">
@@ -72,7 +87,9 @@ const SinglePizza: FC<SinglePizzaProps> = ({
         <div className="single-pizza__pricebox">
           от <span className="single-pizza__price">{price}</span> ₽
         </div>
-        <button className="btn btn--outlined single-pizza__btn">
+        <button
+          className="btn btn--outlined single-pizza__btn"
+          onClick={addPizza}>
           Добавить
         </button>
       </div>

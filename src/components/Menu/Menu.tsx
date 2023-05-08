@@ -5,8 +5,13 @@ import pizzaLogo from "../../assets/images/logo128.png";
 import { IoCartOutline } from "react-icons/io5";
 
 import "./Menu.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Menu = () => {
+  const { totalPrice, allItems } = useSelector(
+    (state: RootState) => state.cartReducer
+  );
   return (
     <nav className="menu">
       <div className="logo">
@@ -22,10 +27,10 @@ const Menu = () => {
       </div>
       <div className="menu__cart">
         <Link to="/cart" className="menu__cart-link">
-          <div className="menu__cart-price">1290 ₽</div>
+          <div className="menu__cart-price">{totalPrice} ₽</div>
           <div className="menu__cart-amount">
-            <IoCartOutline className="menu__cart-image" />3
-            {/* <img src={cartIcon} alt="cart" className="cart__image" />3 */}
+            <IoCartOutline className="menu__cart-image" />
+            {allItems}
           </div>
         </Link>
       </div>

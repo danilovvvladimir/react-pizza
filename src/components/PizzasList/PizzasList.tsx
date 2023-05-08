@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PizzasFetchStatus } from "../../models/pizzasTypes";
 import { fetchPizzas } from "../../redux/slices/pizzasSlice";

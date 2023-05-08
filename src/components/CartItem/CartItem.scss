@@ -22,7 +22,7 @@
   &-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 30px;
+    gap: 10px;
     align-items: center;
   }
   &-amountbox {
@@ -34,6 +34,8 @@
   &-amount {
     font-weight: 700;
     font-size: 22px;
+    width: 30px;
+    text-align: center;
   }
   &-amount-btn {
     display: flex;
@@ -51,6 +53,8 @@
   &-price {
     font-weight: 700;
     font-size: 22px;
+    width: 120px;
+    text-align: center;
   }
   &-delete-btn {
     border: none;
