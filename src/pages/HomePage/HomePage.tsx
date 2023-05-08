@@ -1,4 +1,4 @@
-import React from "react";
+import Pagination from "../../components/Pagination/Pagination";
 import PizzasFilter from "../../components/PizzasFilter/PizzasFilter";
 import PizzasList from "../../components/PizzasList/PizzasList";
 import "./HomePage.scss";
@@ -8,6 +8,7 @@ const HomePage = () => {
     <div className="pizzas">
       <PizzasFilter />
       <PizzasList />
+      <Pagination />
     </div>
   );
 };

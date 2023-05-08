@@ -3,7 +3,7 @@ import "./SinglePizza.scss";
 
 interface SinglePizzaProps {
   id: string;
-  title: string;
+  name: string;
   price: number;
   imageUrl: string;
   sizes: number[];
@@ -19,14 +19,14 @@ const LI_SIZE_ACTIVE_CLASSNAME = "single-pizza__types-list-item--active";
 
 const SinglePizza: FC<SinglePizzaProps> = ({
   id,
-  title,
+  name,
   price,
   imageUrl,
   rating,
   sizes,
   types,
 }) => {
-  const [activeType, setActiveType] = React.useState<number>(0);
+  const [activeType, setActiveType] = React.useState<number>(types[0]);
   const [activeSize, setActiveSize] = React.useState<number>(0);
 
   return (
@@ -36,7 +36,7 @@ const SinglePizza: FC<SinglePizzaProps> = ({
         alt="Пепперони Фреш с перцем"
         className="single-pizza__image"
       />
-      <h3 className="single-pizza__name">{title}</h3>
+      <h3 className="single-pizza__name">{name}</h3>
       <div className="single-pizza__info">
         <ul className="single-pizza__types-list">
           {types.map((typeId) => (

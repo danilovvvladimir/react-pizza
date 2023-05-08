@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PizzasFetchStatus } from "../../models/pizzasTypes";
 import { fetchPizzas } from "../../redux/slices/pizzasSlice";
@@ -13,14 +13,31 @@ const skeletons = [...new Array(6)].map((_, index) => (
 ));
 
 const PizzasList: FC = () => {
+  const {
+    categoryId,
+    sort: sortState,
+    currentPage,
+  } = useSelector((state: RootState) => state.filterReducer);
   const { items, status } = useSelector(
     (state: RootState) => state.pizzaReducer
   );
+
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchPizzas());
-  }, []);
+    const sortBy = sortState.sortProperty.replace("-", "");
+    const order = sortState.sortProperty.includes("-") ? "asc" : "desc";
+    const category = categoryId > 0 ? `category=${categoryId}` : "";
+
+    dispatch(
+      fetchPizzas({
+        sortBy,
+        order,
+        category,
+        currentPage,
+      })
+    );
+  }, [sortState.sortProperty, categoryId, currentPage]);
 
   const pizzas = items.map((item) => <SinglePizza key={item.id} {...item} />);
 

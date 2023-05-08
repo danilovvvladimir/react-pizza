@@ -15,4 +15,5 @@ export type Sort = {
 export interface FilterSliceState {
   categoryId: number;
   sort: Sort;
+  currentPage: number;
 }

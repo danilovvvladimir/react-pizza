@@ -4,6 +4,7 @@ import {
   Pizza,
   PizzasFetchStatus,
   PizzaSliceState,
+  SearchPizzaParams,
 } from "../../models/pizzasTypes";
 
 const initialState: PizzaSliceState = {
@@ -11,12 +12,18 @@ const initialState: PizzaSliceState = {
   status: PizzasFetchStatus.LOADING,
 };
 
-export const fetchPizzas = createAsyncThunk<Pizza[]>(
+export const fetchPizzas = createAsyncThunk<Pizza[], SearchPizzaParams>(
   "pizza/fetchPizzasStatus",
-  async () => {
-    const { data } = await axios.get(
-      "https://6454d7aca74f994b334a7b76.mockapi.io/items"
-    );
+  async (params) => {
+    const { category, order, sortBy, currentPage } = params;
+    const url = `https://6454d7aca74f994b334a7b76.mockapi.io/items?page=${
+      currentPage + 1
+    }&limit=6&${category}&sortBy=${sortBy}&order=${order}`;
+
+    const { data } = await axios.get(url);
+
+    // console.log("Запрос на url:", url, "Пришедшие данные:", data);
+
     return data;
   }
 );

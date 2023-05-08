@@ -6,7 +6,7 @@ export enum PizzasFetchStatus {
 
 export type Pizza = {
   id: string;
-  title: string;
+  name: string;
   price: number;
   imageUrl: string;
   sizes: number[];
@@ -18,3 +18,11 @@ export interface PizzaSliceState {
   items: Pizza[];
   status: PizzasFetchStatus;
 }
+
+export type SearchPizzaParams = {
+  sortBy: string;
+  order: string;
+  category: string;
+  currentPage: number;
+  // search: string;
+};
